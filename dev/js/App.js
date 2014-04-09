@@ -4,7 +4,8 @@ define([
     var App = new Backbone.Marionette.Application();
 
     App.addRegions({
-        contentRegion: '#content'
+        formRegion: '#form_block',
+        listRegion: '#request_block'
     });
 
     App.addInitializer(function () {
