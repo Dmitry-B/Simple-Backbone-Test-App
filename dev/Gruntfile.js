@@ -2,8 +2,9 @@ module.exports = function(grunt) {
 
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-connect');
-    grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-requirejs');
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-htmlmin');
 
     grunt.initConfig({
         connect: {
@@ -18,25 +19,36 @@ module.exports = function(grunt) {
         },
 
         requirejs: {
-            options: {
-                wrap: true,
-                name: "js/vendor/almond",
-                preserveLicenseComments: false,
-                optimize: "uglify",
-                mainConfigFile: "js/config.js",
-                include: ["js/main"],
-                out: "../web/js/main.min.js"
+            compile: {
+                options: {
+                    baseUrl: "js",
+                    wrap: true,
+                    name: 'vendor/almond',
+                    preserveLicenseComments: false,
+                    optimize: 'none',
+                    mainConfigFile: 'js/config/config.js',
+                    include: ['main'],
+                    out: '../web/js/main.min.js'
+                }
             }
         },
 
-        concat: {
-            options: {
-                separator: ''
-            },
+        cssmin: {
+            combine: {
+                files: {
+                    '../web/css/styles.min.css': ['css/*.css']
+                }
+            }
+        },
 
-            css: {
-                src: ['css/reset.css', 'css/normalize.css', 'css/*.css'],
-                dest: '../web/css/styles.min.css'
+        htmlmin: {
+            dist: {
+                options: {
+                    collapseWhitespace: true
+                },
+                files: {
+                    '../web/index.html': 'index.html'
+                }
             }
         },
 
@@ -55,14 +67,15 @@ module.exports = function(grunt) {
 
             css: {
                 files: ['css/*.css'],
-                tasks: ['concat'],
+                tasks: ['cssmin'],
                 options: {
                     interrupt: true
                 }
             },
 
             html: {
-                files: ['../web/**/*.html', '**/*.html'],
+                files: ['**/*.html'],
+                tasks: ['htmlmin'],
                 options: {
                     interrupt: true
                 }
