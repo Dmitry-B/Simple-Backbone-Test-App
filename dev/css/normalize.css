@@ -261,8 +261,6 @@ textarea {
 
 button {
   overflow: visible;
-  border: none;
-  background: none;
 }
 
 button:focus {

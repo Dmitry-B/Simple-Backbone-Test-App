@@ -58,7 +58,7 @@ module.exports = function(grunt) {
             },
 
             scripts: {
-                files: ['js/**/*.js'],
+                files: ['js/**/*.js', 'js/**/*.html'],
                 tasks: ['requirejs'],
                 options: {
                     interrupt: true

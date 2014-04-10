@@ -1,0 +1,28 @@
+<table class="request_table">
+    <thead>
+        <tr>
+            <td>#</td>
+            <td>Field Name</td>
+            <td>Field Value</td>
+        </tr>
+    </thead>
+    <tbody>
+    	<% var idx = 0; for(var key in form) { %>
+	    	<tr>
+		        <td><%= idx++ %></td>
+		        <td><%= key %></td>
+		        <td><%= form[key] %></td>
+	        </tr>
+	    <% } %>
+    </tbody>
+    <tfoot>
+        <tr>
+        	<td colspan="3">
+        		<button class="view">View</button>
+        		<pre class="view_block">
+        			<%= jsonParsed %>
+        		</pre>
+        	</td>
+        </tr>
+    </tfoot>
+</table>
